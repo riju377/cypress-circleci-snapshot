@@ -3,11 +3,13 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: circleci/node:16
+      - image: circleci/node:14
 
 jobs:
   build-and-test:
     executor: node-executor
+    environment:
+      NODE_SERVER_URL: http://localhost:3000  # Set the Node.js server URL
     steps:
       - checkout
 
@@ -19,13 +21,18 @@ jobs:
       # Start the Node.js server in the background
       - run:
           name: Start Node Server
-          command: node ./app.js
+          command: node app.js
           background: true
 
       # Wait for the server to start
       - run:
           name: Wait for Server
           command: sleep 5
+
+      # Set environment variable in Cypress configuration
+      - run:
+          name: Set Environment Variable
+          command: echo "export NODE_SERVER_URL=$NODE_SERVER_URL" >> $BASH_ENV
 
       # Run Cypress tests
       - run:
