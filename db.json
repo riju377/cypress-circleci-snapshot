@@ -1,0 +1,112 @@
+{
+    "apps":[
+        {
+            "name": "app1",
+            "params": {
+                "m_id":1,
+                "m_name":"m",
+                "p_id":1,
+                "qty":5,
+                "ts":10,
+                "sessionId":"abc"
+            }
+        },
+        {
+            "name": "app2",
+            "params": {
+                "mer_id":1,
+                "mer_name":"m",
+                "qnt":5,
+                "s_Id":"abc",
+                "cks":"a"
+            }
+        },
+        {
+            "name": "app3",
+            "params": {
+                "mrcht_id":1,
+                "mrcht_name":"m",
+                
+                "pd_name":"p",
+                "qnty":5,
+                "time_s":10,
+                "ses_Id":"abc"
+            }
+        }
+    ],
+    "appsMapping":[
+        {
+            "name": "app1",
+            "params": {
+                "m_id":1,
+                "m_name":2,
+                "p_id":3,
+                "qty":4 ,
+                "ts":5 ,
+                "sessionId":6
+            }
+        },
+        {
+            "name": "app2",
+            "params": {
+                "mer_id":1,
+                "mer_name":2,
+                "qnt":4,
+                "s_Id":6,
+                "cks":7
+            }
+        },
+        {
+            "name": "app3",
+            "params": {
+                "mrcht_id":1,
+                "mrcht_name":2,
+                "pd_name":8,
+                "qnty":4,
+                "time_s":5,
+                "ses_Id":6
+            }
+        }
+    ],
+    "merchants":[
+            {
+                "merchant_name":{
+                    "name":"flipkart",
+                    "some":"1"
+            },
+                "merchant_id": "100",
+                "product_id": "1000",
+                "product_name": "bulb",
+                "session_id": "10",
+                "quantity": "50",
+                "timestamp": "10",
+                "cookies":"30",
+                "appsUsed":["app2", "app3"]
+            },
+            {
+                "merchant_name":{
+                    "name":"amazon",
+                    "some":2
+                },
+                "merchant_id": "101",
+                "product_id": "1001",
+                "product_name": "fan",
+                "session_id": "11",
+                "quantity": "40",
+                "timestamp": "20",
+                "cookies":"31",
+                "appsUsed":["app1", "app3"]
+            },
+            {
+                "merchant_name":"myntra",
+                "merchant_id": "102",
+                "product_id": "1002",
+                "product_name": "jeans",
+                "session_id": "12",
+                "quantity": "10",
+                "timestamp": "15",
+                "cookies":"32",
+                "appsUsed":["app1","app2", "app3"]
+            }
+    ]
+}
