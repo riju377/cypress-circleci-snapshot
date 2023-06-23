@@ -23,12 +23,9 @@ jobs:
             until nc -z localhost 3000; do
               sleep 1
             done
-      - run:
-          name: Run Cypress Tests
-          command: cypress/run:
-            cypress-command: npx cypress run --browser chrome
-            install-browsers: true
-
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome
+          install-browsers: true
 
 workflows:
   build_test:
