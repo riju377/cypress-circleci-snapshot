@@ -1,7 +1,6 @@
 {
 	"video": false,
 	"experimentalFetchPolyfill": true,
-    "experimentalImageSnapshotsWithPixelDiff": true,
 	"viewportWidth": 1600,
 	"viewportHeight": 800
 }
