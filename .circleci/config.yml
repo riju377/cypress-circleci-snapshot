@@ -7,40 +7,27 @@ jobs:
   build:
     docker:
       - image: cimg/node:16.20-browsers
-
+    working_directory: ~/cypress-circleci-snapshot
     steps:
       - checkout
-
-      # Install dependencies
       - run:
           name: Install Dependencies
-          command: |
-           npm install
-
-      # Start the Node server in the background
+          command: npm install
       - run:
           name: Start Node Server
           command: node app.js
-          # background: true
-
-      # Wait for the Node server to be available
+          background: true
       - run:
           name: Wait for Server
           command: |
             until nc -z localhost 3000; do
               sleep 1
             done
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome
+          install-browsers: true
 
-      # Run Cypress tests
-      # - cypress/run:
-      #     cypress-command: npx cypress run --browser chrome
-      #     install-browsers: true
-          # start-command: npm run start:dev
-
-        workflows:
-          build_test:
-            jobs:
-              - build
-              - cypress/run:
-                  cypress-command: npx cypress run --browser chrome
-                  install-browsers: true
+workflows:
+  build_test:
+    jobs:
+      - build
