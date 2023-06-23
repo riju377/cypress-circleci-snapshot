@@ -28,6 +28,6 @@ jobs:
           install-browsers: true
 
 workflows:
-  build_test:
+  master_workflow:
     jobs:
       - build
