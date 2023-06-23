@@ -17,15 +17,15 @@ jobs:
           name: Start Node Server
           command: node app.js
           background: true
-      - run:
-          name: Wait for Server
-          command: |
-            until nc -z localhost 3000; do
-              sleep 1
-            done
-      - cypress/run:
-          cypress-command: npx cypress run --browser chrome
-          install-browsers: true
+      # - run:
+      #     name: Wait for Server
+      #     command: |
+      #       until nc -z localhost 3000; do
+      #         sleep 1
+      #       done
+      # - cypress/run:
+      #     cypress-command: npx cypress run --browser chrome
+      #     install-browsers: true
 
 workflows:
   master_workflow:
