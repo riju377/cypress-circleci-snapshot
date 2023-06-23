@@ -15,6 +15,6 @@ describe('Home Page', () => {
     // Assert that the home page contains the expected texts
     cy.contains('particular paragraph really shouldnt be the first sentence')
     cy.contains('transition')
-    // cy.contains('Contact us')
+    cy.matchImageSnapshot();
   })
 })
