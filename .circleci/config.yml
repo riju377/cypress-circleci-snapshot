@@ -31,6 +31,6 @@ jobs:
             done
 
       # Run Cypress tests
-      - run:
+      - cypress/run:
           name: Run Cypress Tests
-          command: npm run cypress:run
+          command: npx cypress run
