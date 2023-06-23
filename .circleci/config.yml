@@ -14,7 +14,8 @@ jobs:
       # Install dependencies
       - run:
           name: Install Dependencies
-          command: npm i
+          command: |
+           npm install
 
       # Start the Node server in the background
       - run:
@@ -35,3 +36,8 @@ jobs:
           cypress-command: npx cypress run --browser chrome
           install-browsers: true
           # start-command: npm run start:dev
+
+        workflows:
+          build_test:
+            jobs:
+              - build
