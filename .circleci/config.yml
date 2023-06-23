@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@3
 jobs:
   build:
     docker:
@@ -19,9 +17,7 @@ jobs:
           name: wait for localhost
           shell: /bin/sh
           command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
-      # - cypress/run:
-      #     cypress-command: npx cypress run --browser chrome
-      #     install-browsers: true
+      - run: npm run cy:run
 
 workflows:
   master_workflow:
