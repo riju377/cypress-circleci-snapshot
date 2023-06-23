@@ -1,66 +1,36 @@
 version: 2.1
 
-executors:
-  node-executor:
+orbs:
+  cypress: cypress-io/cypress@3
+
+jobs:
+  build:
     docker:
       - image: circleci/node:14
 
-jobs:
-  build-and-test:
-    executor: node-executor
-    environment:
-      NODE_SERVER_URL: http://localhost:3000  # Set the Node.js server URL
     steps:
       - checkout
 
       # Install dependencies
       - run:
           name: Install Dependencies
-          command: npm install
+          command: npm i
 
-      # Start the Node.js server in the background
+      # Start the Node server in the background
       - run:
           name: Start Node Server
           command: node app.js
           background: true
 
-      # Wait for the server to start
+      # Wait for the Node server to be available
       - run:
           name: Wait for Server
-          command: sleep 5
-
-      # Set environment variable in Cypress configuration
-      - run:
-          name: Set Environment Variable
-          command: echo "export NODE_SERVER_URL=$NODE_SERVER_URL" >> $BASH_ENV
+          command: |
+            until nc -z localhost 3000; do
+              sleep 1
+            done
 
       # Run Cypress tests
       - run:
           name: Run Cypress Tests
-          command: npx cypress run
-
-      # Save the diff image if it exists
-      - run:
-          name: Save Diff Image
-          command: |
-            if [ -f cypress/snapshots/__diff_output__/home-page-snapshot.png ]; then
-              mv cypress/snapshots/__diff_output__/home-page-snapshot.png cypress/snapshots/home-page-snapshot-diff.png
-            fi
-
-      # Ask user to update benchmarked image if diff exists
-      - run:
-          name: Update Benchmark Image
-          command: |
-            if [ -f cypress/snapshots/home-page-snapshot-diff.png ]; then
-              read -p "Do you want to update the benchmarked image? (y/n) " choice
-              if [[ $choice =~ ^[Yy]$ ]]; then
-                mv cypress/snapshots/home-page-snapshot.png cypress/snapshots/home-page-snapshot.png.bak
-                mv cypress/snapshots/home-page-snapshot-diff.png cypress/snapshots/home-page-snapshot.png
-              fi
-            fi
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
+          command: npm run cypress:run
