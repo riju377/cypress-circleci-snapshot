@@ -17,15 +17,13 @@ jobs:
           name: Start Node Server
           command: node app.js
           background: true
-      # - run:
-      #     name: Wait for Server
-      #     command: |
-      #       until nc -z localhost 3000; do
-      #         sleep 1
-      #       done
-      # - cypress/run:
-      #     cypress-command: npx cypress run --browser chrome
-      #     install-browsers: true
+      - run:
+          name: wait for localhost
+          shell: /bin/sh
+          command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome
+          install-browsers: true
 
 workflows:
   master_workflow:
