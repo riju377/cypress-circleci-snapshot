@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve-json": "json-server --watch db.json --port 4000",
     "cy:open": "cypress open --config baseUrl=http://localhost:3000",
-		"cy:run": "cypress run --config baseUrl=http://localhost:3000"
+		"cy:run": "cypress run --config baseUrl=http://localhost:3000",
+		"cyr:run": "rm -rf cypress/snapshots/**/__diff_output__/ && cypress run --config baseUrl=http://localhost:3000"
   },
   "keywords": [],
   "author": "",

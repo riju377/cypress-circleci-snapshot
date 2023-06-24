@@ -1,10 +1,3 @@
-// describe('Visual regression tests', () => {
-//     it('Should match previous screenshot "about Page"', () => {
-//       cy.visit('/home');
-//       cy.matchImageSnapshot();
-//     });
-//   });
-
 describe('Home Page', () => {
   beforeEach(() => {
     // Visit the home page before each test
