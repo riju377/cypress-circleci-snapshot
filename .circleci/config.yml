@@ -24,8 +24,9 @@ jobs:
           name: Cypress Tests
           command: |
             set +e
-            trap 'exit 1' ERR
             npm run cyr:run || true
+            EXIT_STATUS=$?
+            echo "Exit status of your-command-1: $EXIT_STATUS"
       - run:
           name: Commit and push code
           command: |
@@ -34,6 +35,10 @@ jobs:
             git add . || true
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
+
+            if [[ $EXIT_STATUS -ne 0 ]]; then
+              exit 1
+            fi
 
             exit 0
 
