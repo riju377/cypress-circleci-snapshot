@@ -29,7 +29,7 @@ jobs:
             # EXIT_STATUS=$?
             # echo "Exit status of your-command-1: $EXIT_STATUS"
             EXIT_STATUS=$?
-            if [[ $CURRENT_EXIT_CODE -ne 0 ]]; then
+            if [[ $EXIT_STATUS -ne 0 ]]; then
               EXIT_CODE=1
             fi
 
