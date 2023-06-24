@@ -28,6 +28,12 @@ jobs:
             npm run cyr:run
             # EXIT_STATUS=$?
             # echo "Exit status of your-command-1: $EXIT_STATUS"
+            EXIT_STATUS=$?
+            if [[ $CURRENT_EXIT_CODE -ne 0 ]]; then
+              EXIT_CODE=1
+            fi
+
+
       - run:
           name: Commit and push code
           command: |
@@ -40,7 +46,11 @@ jobs:
             # if [[ $EXIT_STATUS -ne 0 ]]; then
             #   exit 1
             # fi
-            exit 0
+            exit $EXIT_CODE
+parameters:
+  EXIT_STATUS:
+    type: integer
+    default: 0
 
 workflows:
   master_workflow:
