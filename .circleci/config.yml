@@ -23,7 +23,8 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            set -e
+            set +e
+            trap 'exit 1' ERR
             npm run cyr:run || true
       - run:
           name: Commit and push code
@@ -33,6 +34,8 @@ jobs:
             git add . || true
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
+
+            exit 0
 
 workflows:
   master_workflow:
