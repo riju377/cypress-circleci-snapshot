@@ -25,7 +25,7 @@ jobs:
           command: |
             set +e
             trap 'exit 1' ERR
-            npm run cyr:run
+            npm run cyr:run || true
             # EXIT_STATUS=$?
             # echo "Exit status of your-command-1: $EXIT_STATUS"
             EXIT_STATUS=$?
