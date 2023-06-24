@@ -26,7 +26,7 @@ jobs:
             git add .
             git commit -m "CircleCI automatic commit"
             git remote add origin "https://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@github.com/riju377/cypress-circleci-snapshot.git"
-            git push origin main
+            git push
 
 workflows:
   master_workflow:
