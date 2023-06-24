@@ -32,13 +32,13 @@ jobs:
       - run:
           name: Check if diff folder exists
           command: |
-            diff_folder=$(ls -d diff 2>/dev/null)
-            if [ -n "$diff_folder" ]; then
+            if [ 1 == 1 ]; then
               echo "Diff folder exists, asking for input..."
-              answer=$(input "Do you want to run the command? (y/n): ")
+              read -p "Do you want to run the command? (y/n): " answer
               if [ "$answer" == "y" ]; then
                 echo "Running command..."
-                run: echo "My command"
+                # Replace the command below with your desired command
+                echo "My command"
               else
                 echo "Skipping command..."
               fi
