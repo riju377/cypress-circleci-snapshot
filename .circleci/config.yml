@@ -20,7 +20,11 @@ jobs:
           name: wait for localhost
           shell: /bin/sh
           command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
-      - run: npm run cyr:run || true
+      - run: 
+          name: Cypress Tests
+          command: |
+            set -e
+            npm run cyr:run || true
       - run:
           name: Commit and push code
           command: |
