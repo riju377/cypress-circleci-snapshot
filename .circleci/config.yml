@@ -18,6 +18,14 @@ jobs:
           shell: /bin/sh
           command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
       - run: npm run cy:run
+      - run:
+          name: Commit and push code
+          command: |
+            git config --global user.email "rijumondal377@gmail.com"
+            git config --global user.name "riju377"
+            git add .
+            git commit -m "CircleCI automatic commit"
+            git push origin HEAD:${CIRCLE_BRANCH}
 
 workflows:
   master_workflow:
