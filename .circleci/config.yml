@@ -29,19 +29,19 @@ jobs:
             git add .
             git commit -m "CircleCI automatic commit"
             git push origin main
-      - run: |
-          if [ -d diff_folder ]; then
-            read -p "Do you want to run the command? (y/n) " choice
-            if [ "$choice" == "y" ]; then
-              # Run the command you want here
-        - run: npx cypress run --env updateSnapshots=true || true
-              echo "Running the command..."
+      - run:
+          command: |
+          if [ -d cypress/snapshots/**/diff_folder ]; then
+              read -p "Do you want to run the command? (y/n) " choice
+              if [ "$choice" == "y" ]; then
+      - run: npx cypress run --env updateSnapshots=true || true
+                echo "Running the command..."
+              else
+                echo "Skipping the command..."
+              fi
             else
-              echo "Skipping the command..."
+              echo "Diff folder not present. Skipping the command..."
             fi
-          else
-            echo "Diff folder not present. Skipping the command..."
-          fi
 
 workflows:
   master_workflow:
