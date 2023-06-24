@@ -28,7 +28,7 @@ jobs:
             git config user.name "riju377"
             git add .
             git commit -m "CircleCI automatic commit"
-            git push origin main
+            git push origin main || true
       - run:
           name: Check if diff folder exists
           command: |
