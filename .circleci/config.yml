@@ -29,22 +29,22 @@ jobs:
             git add .
             git commit -m "CircleCI automatic commit"
             git push origin main
-        - run:
-            name: Check if diff folder exists
-            command: |
-              diff_folder=$(ls -d diff 2>/dev/null)
-              if [ -n "$diff_folder" ]; then
-                echo "Diff folder exists, asking for input..."
-                answer=$(input "Do you want to run the command? (y/n): ")
-                if [ "$answer" == "y" ]; then
-                  echo "Running command..."
-                  run: echo "My command"
-                else
-                  echo "Skipping command..."
-                fi
+      - run:
+          name: Check if diff folder exists
+          command: |
+            diff_folder=$(ls -d diff 2>/dev/null)
+            if [ -n "$diff_folder" ]; then
+              echo "Diff folder exists, asking for input..."
+              answer=$(input "Do you want to run the command? (y/n): ")
+              if [ "$answer" == "y" ]; then
+                echo "Running command..."
+                run: echo "My command"
               else
-                echo "Diff folder is not present, skipping command."
+                echo "Skipping command..."
               fi
+            else
+              echo "Diff folder is not present, skipping command."
+            fi
 
 workflows:
   master_workflow:
