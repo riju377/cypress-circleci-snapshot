@@ -25,7 +25,7 @@ jobs:
             git config --global user.name "riju377"
             git add .
             git commit -m "CircleCI automatic commit"
-            git remote add origin "https://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@github.com/riju377/cypress-circleci-snapshot.git"
+            git remote set-url origin "https://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@github.com/riju377/cypress-circleci-snapshot.git"
             git push
 
 workflows:
