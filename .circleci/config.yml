@@ -24,16 +24,13 @@ jobs:
           name: Cypress Tests
           command: |
             set +e
-            trap 'exit 1' ERR
             npm run cyr:run || true
-            # EXIT_STATUS=$?
-            # echo "Exit status of your-command-1: $EXIT_STATUS"
             EXIT_STATUS=$?
-            if [[ $EXIT_STATUS -ne 0 ]]; then
-              EXIT_CODE=1
-            fi
-
-
+            echo "Exit status of your-command-1: $EXIT_STATUS"
+            EXIT_STATUS=$?
+            # if [[ $EXIT_STATUS -ne 0 ]]; then
+            #   EXIT_CODE=1
+            # fi
       - run:
           name: Commit and push code
           command: |
@@ -43,14 +40,11 @@ jobs:
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
 
-            # if [[ $EXIT_STATUS -ne 0 ]]; then
-            #   exit 1
-            # fi
-            exit $EXIT_CODE
-parameters:
-  EXIT_STATUS:
-    type: integer
-    default: 0
+            if [[ $EXIT_STATUS -ne 0 ]]; then
+              echo "Exit status of your-command-1: $EXIT_STATUS"
+              exit 1
+            fi
+            # exit $EXIT_CODE
 
 workflows:
   master_workflow:
