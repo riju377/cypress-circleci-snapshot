@@ -23,14 +23,14 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            set +e
-            npm run cyr:run
-            CURR_STATUS=$?
-            echo "Exit status of your-command-1: $CURR_STATUS"
-            if [[ $CURR_STATUS -ne 0 ]]; then
-              export EXIT_CODE=1
-              echo "Exit Code of your-command-1: $EXIT_CODE"
-            fi
+            # set +e
+            npm run cyr:run || echo "FIRST_STATEMENT_FAILED=true" >> $HOME/workspace/status
+            # CURR_STATUS=$?
+            # echo "Exit status of your-command-1: $CURR_STATUS"
+            # if [[ $CURR_STATUS -ne 0 ]]; then
+            #   export EXIT_CODE=1
+            #   echo "Exit Code of your-command-1: $EXIT_CODE"
+            # fi
       - run:
           name: Commit and push code
           command: |
@@ -39,17 +39,17 @@ jobs:
             git add . || true
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
-      # - run:
-      #     name: Finally
-      #     command: |
+      - run:
+          name: Finally
+          command: |
             # echo "Exit Code of your-command-1: $EXIT_CODE"
             # if [[ "$EXIT_CODE" -ne 0 ]]; then
             #   echo "Exit status of your-command-1"
             #   exit 1
             # fi
-            # if grep -q "true" $HOME/workspace/status; then
-            #   exit 1
-            # fi
+            if grep -q "true" $HOME/workspace/status; then
+              exit 1
+            fi
 
 workflows:
   master_workflow:
