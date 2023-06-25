@@ -25,12 +25,11 @@ jobs:
           command: |
             set +e
             npm run cyr:run
-            EXIT_STATUS=$?
-            echo "Exit status of your-command-1: $EXIT_STATUS"
-            EXIT_STATUS=$?
-            # if [[ $EXIT_STATUS -ne 0 ]]; then
-            #   EXIT_CODE=1
-            # fi
+            CURR_STATUS=$?
+            echo "Exit status of your-command-1: $CURR_STATUS"
+            if [[ $CURR_STATUS -ne 0 ]]; then
+              export EXIT_CODE=1
+            fi
       - run:
           name: Commit and push code
           command: |
@@ -40,13 +39,12 @@ jobs:
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
       - run:
-          name: Commit and push code
+          name: Finally
           command: |
             if [[ $EXIT_STATUS -ne 0 ]]; then
               echo "Exit status of your-command-1"
               exit 1
             fi
-            exit 0
 
 workflows:
   master_workflow:
