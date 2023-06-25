@@ -39,12 +39,14 @@ jobs:
             git add . || true
             git commit -m "CircleCI automatic commit" || true
             git push origin main || true
-
+      - run:
+          name: Commit and push code
+          command: |
             if [[ $EXIT_STATUS -ne 0 ]]; then
               echo "Exit status of your-command-1"
               exit 1
             fi
-            # exit $EXIT_CODE
+            exit 0
 
 workflows:
   master_workflow:
