@@ -24,7 +24,7 @@ jobs:
           name: Cypress Tests
           command: |
             set +e
-            npm run cyr:run || true
+            npm run cyr:run
             EXIT_STATUS=$?
             echo "Exit status of your-command-1: $EXIT_STATUS"
             EXIT_STATUS=$?
