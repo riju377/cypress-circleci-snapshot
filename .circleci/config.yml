@@ -26,7 +26,13 @@ jobs:
           name: Cypress Tests
           command: |
             set +e
-            npm run cyr:run
+            if [[ "$SWITCH" -eq 1 ]]; then
+              echo "Variable value is 1. Running command A."
+              npm run cyr:run --env updateSnapshots=true
+            else
+              echo "Variable value is 0. Running command B."
+              npm run cyr:run
+            fi
             CURR_STATUS=$?
             echo "Exit status of your-command-1: $CURR_STATUS"
             if [[ $CURR_STATUS -ne 0 ]]; then
