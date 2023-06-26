@@ -3,7 +3,7 @@ jobs:
   build:
     environment:
       EXIT_CODE: 0
-      UPDATE: 0
+      UPDATE: 1
     docker:
       - image: cimg/node:16.20-browsers
     working_directory: ~/cypress-circleci-snapshot
