@@ -30,8 +30,8 @@ jobs:
             CURR_STATUS=$?
             echo "Exit status of your-command-1: $CURR_STATUS"
             if [[ $CURR_STATUS -ne 0 ]]; then
-              EXIT_CODE=1
-              echo "Exit Code of your-command-1: $EXIT_CODE"
+              echo "Setting EXIT_CODE to 1"
+              echo "EXIT_CODE=1" >> $BASH_ENV
             fi
             set -e
       - run:
