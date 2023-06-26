@@ -1,6 +1,8 @@
 version: 2.1
 jobs:
   build:
+    environment:
+      EXIT_CODE: 0
     docker:
       - image: cimg/node:16.20-browsers
     working_directory: ~/cypress-circleci-snapshot
@@ -23,14 +25,15 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            # set +e
-            npm run cyr:run || echo "FIRST_STATEMENT_FAILED=true" >> $HOME/workspace/status
-            # CURR_STATUS=$?
-            # echo "Exit status of your-command-1: $CURR_STATUS"
-            # if [[ $CURR_STATUS -ne 0 ]]; then
-            #   export EXIT_CODE=1
-            #   echo "Exit Code of your-command-1: $EXIT_CODE"
-            # fi
+            set +e
+            npm run cyr:run
+            CURR_STATUS=$?
+            echo "Exit status of your-command-1: $CURR_STATUS"
+            if [[ $CURR_STATUS -ne 0 ]]; then
+              EXIT_CODE=1
+              echo "Exit Code of your-command-1: $EXIT_CODE"
+            fi
+            set -e
       - run:
           name: Commit and push code
           command: |
@@ -42,12 +45,9 @@ jobs:
       - run:
           name: Finally
           command: |
-            # echo "Exit Code of your-command-1: $EXIT_CODE"
-            # if [[ "$EXIT_CODE" -ne 0 ]]; then
-            #   echo "Exit status of your-command-1"
-            #   exit 1
-            # fi
-            if grep -q "true" $HOME/workspace/status; then
+            echo "Exit Code of your-command-1: $EXIT_CODE"
+            if [[ "$EXIT_CODE" -ne 0 ]]; then
+              echo "Exit status of your-command-1"
               exit 1
             fi
 
