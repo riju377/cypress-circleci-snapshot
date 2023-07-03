@@ -26,7 +26,7 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            export PERCY_TOKEN=process.env.PERCY_TOKEN
+            echo 'export PERCY_TOKEN=$PERCY_TOKEN' >> $BASH_ENV
             npm run cy:percy
             # set +e
             # if [[ "$UPDATE" -eq 1 ]]; then
