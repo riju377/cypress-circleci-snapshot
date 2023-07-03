@@ -26,37 +26,39 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            set +e
-            if [[ "$UPDATE" -eq 1 ]]; then
-              # Run tests and update the snapshots
-              npm run cyupdate:run
-            else
-              # Run without updating the snapshot
-              npm run cy:run
-            fi
-            # Check the exit status of tests
-            CURR_STATUS=$?
-            if [[ $CURR_STATUS -ne 0 ]]; then
-              echo "EXIT_CODE=1" >> $BASH_ENV
-            fi
-            set -e
-      - run:
-          name: Commit and push code
-          command: |
-            # Push the snapshots to github
-            git config user.email "rijumondal377@gmail.com"
-            git config user.name "riju377"
-            git add . || true
-            git commit -m "CircleCI automatic commit" || true
-            git push origin main || true
-      - run:
-          name: Finally
-          command: |
-            # If any test fails we return error
-            if [[ "$EXIT_CODE" -ne 0 ]]; then
-              echo "Exit status of your-command-1"
-              exit 1
-            fi
+            export PERCY_TOKEN=process.env.PERCY_TOKEN
+            npm run cy:percy
+            # set +e
+            # if [[ "$UPDATE" -eq 1 ]]; then
+            #   # Run tests and update the snapshots
+            #   npm run cyupdate:run
+            # else
+            #   # Run without updating the snapshot
+            #   npm run cy:run
+            # fi
+            # # Check the exit status of tests
+            # CURR_STATUS=$?
+            # if [[ $CURR_STATUS -ne 0 ]]; then
+            #   echo "EXIT_CODE=1" >> $BASH_ENV
+            # fi
+            # set -e
+      # - run:
+      #     name: Commit and push code
+      #     command: |
+      #       # Push the snapshots to github
+      #       git config user.email "rijumondal377@gmail.com"
+      #       git config user.name "riju377"
+      #       git add . || true
+      #       git commit -m "CircleCI automatic commit" || true
+      #       git push origin main || true
+      # - run:
+      #     name: Finally
+      #     command: |
+      #       # If any test fails we return error
+      #       if [[ "$EXIT_CODE" -ne 0 ]]; then
+      #         echo "Exit status of your-command-1"
+      #         exit 1
+      #       fi
 
 workflows:
   master_workflow:

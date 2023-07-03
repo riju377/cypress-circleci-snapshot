@@ -1,7 +1,0 @@
-{
-	"baseUrl":"http://localhost:3000",
-	"video": false,
-	"experimentalFetchPolyfill": true,
-	"viewportWidth": 1600,
-	"viewportHeight": 800
-}
