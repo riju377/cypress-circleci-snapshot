@@ -6,9 +6,9 @@ describe('Home Page', () => {
   
     it('should contain expected texts', () => {
       // Assert that the home page contains the expected texts
+      cy.percySnapshot('First');
       cy.contains('particular paragraph really shouldnt be the first sentence')
       cy.contains('transition')
       // cy.toMatchImageSnapshot();
-      cy.percySnapshot('First');
     })
   })
