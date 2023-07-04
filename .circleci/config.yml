@@ -23,6 +23,7 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
+            # percy and cypress exe
             echo 'export PERCY_TOKEN=$PERCY_TOKEN' >> $BASH_ENV
             npm run cy:percy
 
