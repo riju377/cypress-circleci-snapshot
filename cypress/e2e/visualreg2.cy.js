@@ -9,8 +9,11 @@ describe('Home Page', () => {
     //   cy.contains('particular paragraph really shouldnt be the first sentence')
     //   cy.contains('transition')
       // cy.toMatchImageSnapshot();
-      cy.percySnapshot('Second')
+      cy.compareSnapshot('second')
+      // cy.percySnapshot('Second')
       cy.visit('http://localhost:3000/home')
-      cy.percySnapshot('Third')
+      // cy.percySnapshot('Third')
+      // cy.toMatchImageSnapshot();
+      cy.compareSnapshot('third')
     })
   })
