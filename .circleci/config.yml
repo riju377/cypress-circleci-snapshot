@@ -42,11 +42,11 @@ jobs:
             set -e
 
       - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
-          destination: baseline
-      - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
-          destination: comparision
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots
+          destination: cypress-visual-screenshots-artifacts
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
+      #     destination: comparision
       # - store_artifacts:
       #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
       #       destination: comparision
