@@ -47,12 +47,12 @@ jobs:
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
           destination: comparision
-      - store_artifacts:
-            path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
-            destination: comparision
-      - store_artifacts:
-            path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-            destination: diff
+      # - store_artifacts:
+      #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
+      #       destination: comparision
+      # - store_artifacts:
+      #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+      #       destination: diff
       # - run:
       #     name: Commit and push code
       #     command: |
@@ -75,3 +75,7 @@ workflows:
   master_workflow:
     jobs:
       - build
+
+
+
+# curl -H "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" https://circleci.com/api/v1.1/project/github/riju377/cypress-circleci-snapshot/88/artifacts \ | grep -o 'https://[^"]*' \ | wget --verbose --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" --input-file -
