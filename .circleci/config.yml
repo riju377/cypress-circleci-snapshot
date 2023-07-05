@@ -6,7 +6,7 @@ jobs:
       UPDATE: 0
     docker:
       - image: cimg/node:16.20-browsers
-    working_directory: ~/cypress-circleci-snapshot
+    working_directory: /cypress-circleci-snapshot
     steps:
       - checkout
       - add_ssh_keys:
@@ -42,7 +42,7 @@ jobs:
             set -e
 
       - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots
+          path: /cypress-circleci-snapshot/cypress-visual-screenshots
           destination: cypress-visual-screenshots-artifacts
       # - store_artifacts:
       #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
