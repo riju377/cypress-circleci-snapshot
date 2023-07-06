@@ -43,13 +43,13 @@ jobs:
 
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
-          destination: baseline
+          destination: cypress-visual-screenshots/baseline
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
-          destination: comparision
+          destination: cypress-visual-screenshots/comparision
       - store_artifacts:
             path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-            destination: diff
+            destination: cypress-visual-screenshots/diff
       # - run:
       #     name: Commit and push code
       #     command: |
