@@ -45,8 +45,8 @@ jobs:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
           destination: cypress-visual-screenshots/baseline
       - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparision
-          destination: cypress-visual-screenshots/comparision
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+          destination: cypress-visual-screenshots/comparison
       - store_artifacts:
             path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
             destination: cypress-visual-screenshots/diff
@@ -84,3 +84,47 @@ workflows:
 #  --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" \
 #  | grep -o 'https://[^"]*' \
 #  | wget --header="Circle-Token:"CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b"" -v -i -
+
+# curl -X GET https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/93/artifacts \
+#  --header "Content-Type: application/json" \
+#  --header "Accept: application/json" \
+#  --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" \
+# | jq -r '.items[] | {path: .path, url: .url}' \
+#   | while read -r line; do
+# urls=$(echo "$response" | grep -o '"url":"[^"]*' | cut -d'"' -f4)
+# paths=$(echo "$response" | grep -o '"path":"[^"]*' | cut -d'"' -f4)
+
+# for ((i = 0; i < ${#urls[@]}; i++)); do
+#   url="${urls[i]}"
+#   path="${paths[i]}"
+
+#   directory=$(dirname "$path" | rev | cut -d'/' -f2- | rev)
+
+#   if [ ! -d "$directory" ]; then
+#     mkdir -p "$directory"
+#   fi
+
+#   wget -P "$directory" --header="Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" -v "$url"
+# done
+
+
+
+# | jq -r '.items[] | {path: .path, url: .url}' \
+#   | jq -r '.path + ";;" + .url' \
+#   | while IFS=";;" read -r path url; do
+#       directory=$(dirname "$path" | sed 's/\/[^\/]*$//')
+
+#       if [ ! -d "$directory" ]; then
+#         mkdir -p "$directory"
+#       fi
+
+#       wget -P "$directory" --header="Circle-Token:YOUR_CIRCLECI_TOKEN" -v "$url"
+#     done
+
+
+
+
+
+
+
+
