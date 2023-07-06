@@ -41,15 +41,15 @@ jobs:
             fi
             set -e
 
-      - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
-          destination: cypress-visual-screenshots/baseline
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
+      #     destination: cypress-visual-screenshots/baseline
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
           destination: cypress-visual-screenshots/comparison
-      - store_artifacts:
-            path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-            destination: cypress-visual-screenshots/diff
+      # - store_artifacts:
+      #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+      #       destination: cypress-visual-screenshots/diff
       # - run:
       #     name: Commit and push code
       #     command: |
