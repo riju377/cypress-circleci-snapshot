@@ -39,18 +39,18 @@ jobs:
           name: Updating Baseline
           command: python3 circleciUpdate.py
 
-      # - store_artifacts:
-      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-      #     destination: cypress-visual-screenshots/baseline
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-          destination: cypress-visual-screenshots/comparison
-      - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-          destination: cypress-visual-screenshots/diff
-      - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-report/
-          destination: cypress-visual-report/
+          destination: cypress-visual-screenshots/baseline
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+      #     destination: cypress-visual-screenshots/comparison
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+      #     destination: cypress-visual-screenshots/diff
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-report/
+      #     destination: cypress-visual-report/
       - run:
           name: Checking for test failure
           command: |

@@ -536,7 +536,6 @@
             <strong>$__failureThreshold__%</strong>
             <div>Actual: </div>
             <strong>$__percentage__%</strong>
-            <button class="update-baseline-button" data-id="$__id__">Update Baseline</button>
           </div>
 
           <div class="collapse-item__content">
@@ -594,7 +593,7 @@
     </template>
 
     <script type="text/javascript">
-      const testData = [{"status":"pass","name":"visualcapture.cy-first","percentage":0,"failureThreshold":0},{"status":"pass","name":"visualreg2.cy-second","percentage":0,"failureThreshold":0},{"status":"fail","name":"visualreg2.cy-third","percentage":0.001628347368197324,"failureThreshold":0}]
+      const testData = [{"status":"pass","name":"visualcapture.cy-first","percentage":0,"failureThreshold":0},{"status":"pass","name":"visualreg2.cy-second","percentage":0,"failureThreshold":0},{"status":"fail","name":"visualreg2.cy-third","percentage":0.14005139749175635,"failureThreshold":0}]
 
       const ITEM_STATUS = {
         PASS: 'pass',
@@ -826,32 +825,6 @@
           const container = target.querySelector(selector)
           container.append(...children)
         },
-
-        addUpdateBaselineEventListener(target) {
-          const button = target.querySelector('.update-baseline-button');
-          button.addEventListener('click', function(event) {
-            const snapshotId = event.target.dataset.id;
-            const currentImage = getCurrentlyDisplayedImage(snapshotId);
-            updateBaselineImageOnClient(snapshotId, currentImage);
-          });
-        }
-      }
-
-      // Helper function to retrieve the currently displayed image based on the snapshot ID
-      function getCurrentlyDisplayedImage(snapshotId) {
-        const displaySnapshot = document.querySelector('#display-snapshot');
-        return displaySnapshot.src.replace(/.*\/(baseline|diff|comparison)\//, '');
-      }
-
-      // Helper function to update the baseline image for a specific snapshot ID on the client-side
-      function updateBaselineImageOnClient(snapshotId, newImage) {
-        // Here, you can implement the logic to update the baseline image on the client-side.
-        // However, please note that due to security restrictions, you cannot directly access the local file system using JavaScript in the browser.
-        // You can consider using other methods like storing the new image data in browser storage (e.g., local storage) or uploading the new image to a server for further processing.
-
-        // Example using local storage:
-        localStorage.setItem(snapshotId, newImage);
-        console.log('Baseline image updated successfully on the client-side.');
       }
 
       const CollapseItemBuilder = {
@@ -874,7 +847,6 @@
           })
           DOMBuilder.addExpansionEventListener(leaf)
           ModalHelpers.addShowSnapshotsModalEventListener(leaf, id)
-          DOMBuilder.addUpdateBaselineEventListener(leaf); // Add this line to attach the event listener
           return leaf
         },
 
