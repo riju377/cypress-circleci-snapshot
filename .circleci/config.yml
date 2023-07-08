@@ -38,12 +38,12 @@ jobs:
            python3 updateBaseline.py
 
 
-      - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
-          destination: cypress-visual-screenshots/baseline
       # - store_artifacts:
-      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-      #     destination: cypress-visual-screenshots/comparison
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
+      #     destination: cypress-visual-screenshots/baseline
+      - store_artifacts:
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+          destination: cypress-visual-screenshots/comparison
       # - store_artifacts:
       #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
       #       destination: cypress-visual-screenshots/diff
