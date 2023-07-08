@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-const apiEndpoint = 'https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/93/artifacts';
+const apiEndpoint = 'https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/101/artifacts';
 const headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -30,21 +30,18 @@ https.get(apiEndpoint, { headers }, (response) => {
         const directory = path.dirname(filePath);
         const filename = path.basename(filePath);
 
+        // Create the directory if it doesn't exist
+        fs.mkdirSync(directory, { recursive: true });
+
         // Download the image file
         https.get(fileUrl, { headers }, (res) => {
           const savePath = path.join(process.cwd(), filePath);
-
-          // Remove the existing file if it already exists
-          if (fs.existsSync(savePath)) {
-            fs.unlinkSync(savePath);
-          }
-
           const fileStream = fs.createWriteStream(savePath);
 
           res.pipe(fileStream);
 
           fileStream.on('finish', () => {
-            console.log(`Downloaded image: ${filename}`);
+            console.log(`Downloaded image: ${savePath}`);
           });
 
           fileStream.on('error', (error) => {
