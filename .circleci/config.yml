@@ -6,6 +6,7 @@ jobs:
       UPDATE: 0
     docker:
       - image: cimg/node:16.20-browsers
+      - image: cimg/python:3.9.6
     working_directory: ~/cypress-circleci-snapshot
     steps:
       - checkout
@@ -26,39 +27,21 @@ jobs:
       - run: 
           name: Cypress Tests
           command: |
-            set +e
-            if [[ "$UPDATE" -eq 1 ]]; then
-              # Run tests and update the snapshots
-              npm run cyupdate:run
-            else
-              # Run without updating the snapshot
-              npm run cy:run
-            fi
-            # Check the exit status of tests
-            CURR_STATUS=$?
-            if [[ $CURR_STATUS -ne 0 ]]; then
-              echo "EXIT_CODE=1" >> $BASH_ENV
-            fi
-            set -e
+            npm run cy:run
 
-      # - store_artifacts:
-      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
-      #     destination: cypress-visual-screenshots/baseline
+      - run:
+          name: Updating Baseline
+          command: python3 updateBaseline.py
+
       - store_artifacts:
-          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-          destination: cypress-visual-screenshots/comparison
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
+          destination: cypress-visual-screenshots/baseline
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+      #     destination: cypress-visual-screenshots/comparison
       # - store_artifacts:
       #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
       #       destination: cypress-visual-screenshots/diff
-      # - run:
-      #     name: Commit and push code
-      #     command: |
-      #       # Push the snapshots to github
-      #       git config user.email "rijumondal377@gmail.com"
-      #       git config user.name "riju377"
-      #       git add . || true
-      #       git commit -m "CircleCI automatic commit" || true
-      #       git push origin main || true
       # - run:
       #     name: Finally
       #     command: |
@@ -108,18 +91,6 @@ workflows:
 # done
 
 
-
-# | jq -r '.items[] | {path: .path, url: .url}' \
-#   | jq -r '.path + ";;" + .url' \
-#   | while IFS=";;" read -r path url; do
-#       directory=$(dirname "$path" | sed 's/\/[^\/]*$//')
-
-#       if [ ! -d "$directory" ]; then
-#         mkdir -p "$directory"
-#       fi
-
-#       wget -P "$directory" --header="Circle-Token:YOUR_CIRCLECI_TOKEN" -v "$url"
-#     done
 
 
 
