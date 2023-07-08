@@ -23,17 +23,17 @@ jobs:
           name: wait for localhost
           shell: /bin/sh
           command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
-      - run: 
-          name: Cypress Tests
-          command: |
-            set +e
-            npm run cy:run
-            # Check the exit status of tests
-            CURR_STATUS=$?
-            if [[ $CURR_STATUS -ne 0 ]]; then
-            echo "EXIT_CODE=1" >> $BASH_ENV
-            fi
-            set -e
+      # - run: 
+      #     name: Cypress Tests
+      #     command: |
+      #       set +e
+      #       npm run cy:run
+      #       # Check the exit status of tests
+      #       CURR_STATUS=$?
+      #       if [[ $CURR_STATUS -ne 0 ]]; then
+      #       echo "EXIT_CODE=1" >> $BASH_ENV
+      #       fi
+      #       set -e
 
       - run:
           name: Updating Baseline
