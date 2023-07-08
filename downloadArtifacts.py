@@ -1,5 +1,6 @@
-import requests
 import os
+import shutil
+import requests
 
 build_number = input("Enter the Build_number: ")
 
@@ -17,6 +18,13 @@ data = response.json()
 
 # Check if the request was successful
 if response.status_code == 200:
+
+    # Delete directories "diff" and "comp" if they exist
+    if os.path.exists("diff"):
+        shutil.rmtree("diff")
+    if os.path.exists("comp"):
+        shutil.rmtree("comp")
+
     # Process the items in the response JSON
     for item in data['items']:
         file_path = item['path']

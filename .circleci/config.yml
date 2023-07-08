@@ -3,7 +3,6 @@ jobs:
   build:
     environment:
       EXIT_CODE: 0
-      UPDATE: 0
     docker:
       - image: cimg/node:16.20-browsers
       - image: cimg/python:3.9.6
@@ -29,35 +28,37 @@ jobs:
           command: |
             set +e
             npm run cy:run
+            # Check the exit status of tests
+            CURR_STATUS=$?
+            if [[ $CURR_STATUS -ne 0 ]]; then
+            echo "EXIT_CODE=1" >> $BASH_ENV
+            fi
             set -e
 
       - run:
           name: Updating Baseline
-          command: |
-           pwd
-           python3 updateBaseline.py
-
+          command: python3 circleciUpdate.py
 
       # - store_artifacts:
-      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
       #     destination: cypress-visual-screenshots/baseline
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
           destination: cypress-visual-screenshots/comparison
-      # - store_artifacts:
-      #       path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-      #       destination: cypress-visual-screenshots/diff
       - store_artifacts:
-          path: ~/cypress-circle-snapshot/~/cypress-circleci-snapshot/cypress-visual-report/
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+          destination: cypress-visual-screenshots/diff
+      - store_artifacts:
+          path: ~/cypress-circleci-snapshot/cypress-visual-report/
           destination: cypress-visual-report/
-      # - run:
-      #     name: Finally
-      #     command: |
-      #       # If any test fails we return error
-      #       if [[ "$EXIT_CODE" -ne 0 ]]; then
-      #         echo "Exit status of your-command-1"
-      #         exit 1
-      #       fi
+      - run:
+          name: Checking for test failure
+          command: |
+            # If any test fails we return error
+            if [[ "$EXIT_CODE" -ne 0 ]]; then
+              echo "Exit status of your-command-1"
+              exit 1
+            fi
 
 workflows:
   master_workflow:
