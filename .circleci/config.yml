@@ -31,7 +31,10 @@ jobs:
 
       - run:
           name: Updating Baseline
-          command: python3 updateBaseline.py
+          command: |
+           pwd
+           python3 updateBaseline.py
+
 
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/baseline
@@ -72,23 +75,9 @@ workflows:
 #  --header "Content-Type: application/json" \
 #  --header "Accept: application/json" \
 #  --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" \
-# | jq -r '.items[] | {path: .path, url: .url}' \
-#   | while read -r line; do
-# urls=$(echo "$response" | grep -o '"url":"[^"]*' | cut -d'"' -f4)
-# paths=$(echo "$response" | grep -o '"path":"[^"]*' | cut -d'"' -f4)
 
-# for ((i = 0; i < ${#urls[@]}; i++)); do
-#   url="${urls[i]}"
-#   path="${paths[i]}"
 
-#   directory=$(dirname "$path" | rev | cut -d'/' -f2- | rev)
 
-#   if [ ! -d "$directory" ]; then
-#     mkdir -p "$directory"
-#   fi
-
-#   wget -P "$directory" --header="Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" -v "$url"
-# done
 
 
 

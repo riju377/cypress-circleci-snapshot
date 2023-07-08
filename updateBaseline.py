@@ -2,8 +2,8 @@ import os
 import shutil
 
 # Specify the paths to the two folders
-folder1_path = "/Users/rijumondal/Desktop/cypress-circleci-snapshot/cypress-visual-screenshots/diff"
-folder2_path = "/Users/rijumondal/Desktop/cypress-circleci-snapshot/cypress-visual-screenshots/comparison"
+folder1_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/diff"
+folder2_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/comparison"
 
 # Get the list of file names in folder1
 folder1_files = os.listdir(folder1_path)
@@ -19,7 +19,7 @@ for file_name in folder2_files:
         print(f"Deleted file: {file_path}")
 
 
-folder3_path = "/Users/rijumondal/Desktop/cypress-circleci-snapshot/cypress-visual-screenshots/baseline"
+folder3_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/baseline"
 folder2_files = os.listdir(folder2_path)
 
 # Iterate over the files in folder2
