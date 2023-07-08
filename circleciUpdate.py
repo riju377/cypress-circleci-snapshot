@@ -24,3 +24,4 @@ for file_name in comparison_files:
 
     # Delete the file
     os.remove(file_path)
+    print(f"Deleted file: {file_path}")
