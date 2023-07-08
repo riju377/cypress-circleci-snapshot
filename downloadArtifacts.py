@@ -1,8 +1,10 @@
 import requests
 import os
 
+build_number = input("Enter the Build_number: ")
+
 # API endpoint and headers
-api_url = "https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/93/artifacts"
+api_url = f"https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/{build_number}/artifacts"
 headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",

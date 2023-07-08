@@ -2,29 +2,29 @@ import os
 # import shutil
 
 # Specify the paths to the two folders
-folder1_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/diff"
-folder2_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/comparison"
+diff_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/diff"
+comparison_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/comparison"
 
 # Get the list of file names in folder1
-folder1_files = os.listdir(folder1_path)
+diff_files = os.listdir(diff_path)
 
 # Get the list of file names in folder2
-folder2_files = os.listdir(folder2_path)
+comparison_files = os.listdir(comparison_path)
 
 # Delete files in folder2 that don't have matching names in folder1
-for file_name in folder2_files:
-    if file_name not in folder1_files:
-        file_path = os.path.join(folder2_path, file_name)
+for file_name in comparison_files:
+    if file_name not in diff_files:
+        file_path = os.path.join(comparison_path, file_name)
         os.remove(file_path)
         print(f"Deleted file: {file_path}")
 
 
 # folder3_path = "/home/circleci/cypress-circleci-snapshot/cypress-visual-screenshots/baseline"
-# folder2_files = os.listdir(folder2_path)
+# comparison_files = os.listdir(comparison_path)
 
 # # Iterate over the files in folder2
-# for file_name in folder2_files:
-#     file2_path = os.path.join(folder2_path, file_name)
+# for file_name in comparison_files:
+#     file2_path = os.path.join(comparison_path, file_name)
 #     file3_path = os.path.join(folder3_path, file_name)
 
 #     # Check if the file exists in folder3
