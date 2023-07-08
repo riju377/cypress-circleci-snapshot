@@ -9,5 +9,6 @@ describe('Home Page', () => {
       // cy.percySnapshot('Second')
       cy.visit('http://localhost:3000/home')
       cy.compareSnapshot('third')
+      cy.compareSnapshot('forth')
     })
   })
