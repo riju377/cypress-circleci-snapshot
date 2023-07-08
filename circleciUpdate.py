@@ -23,7 +23,7 @@ if exit_status != 0:
     # Perform actions when the condition is true
     subprocess.run("echo 'EXIT_CODE=1' >> $BASH_ENV", shell=True, executable="/bin/bash")
 
-subprocess.run("set +e", shell=True, executable="/bin/bash")
+subprocess.run("set -e", shell=True, executable="/bin/bash")
 
 # Get the list of file names in the diff folder
 diff_files = os.listdir(diff_path)
