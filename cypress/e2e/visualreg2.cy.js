@@ -6,6 +6,7 @@ describe('Home Page', () => {
   
     it('should contain expected texts', () => {
       cy.compareSnapshot('second')
+      cy.compareSnapshot('fifth')
       // cy.percySnapshot('Second')
       cy.visit('http://localhost:3000/home')
       cy.compareSnapshot('third')
