@@ -26,20 +26,19 @@ baseline_files_before = os.listdir(baseline_path)
 # subprocess.run("set -e", shell=True, executable="/bin/bash")
 
 
-import subprocess
-
-command = """
+command = r'''
 set +e
 npm run cy:run
 # Check the exit status of tests
 CURR_STATUS=$?
-if [[ $CURR_STATUS -ne 0 ]]; then
+if [ $CURR_STATUS -ne 0 ]; then
     echo "EXIT_CODE=1" >> $BASH_ENV
 fi
 set -e
-"""
+'''
 
-EXIT_CODE = subprocess.call(command, shell=True)
+exit_code = subprocess.call(["/bin/sh", "-c", command])
+
 
 
 # Get the list of file names in the diff folder
