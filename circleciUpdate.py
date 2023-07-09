@@ -11,19 +11,36 @@ baseline_files_before = os.listdir(baseline_path)
 
 
 # Run the commands separately
-subprocess.run("set +e", shell=True, executable="/bin/bash")
-subprocess.run("npm run cy:run", shell=True, executable="/bin/bash")
+# subprocess.run("set +e", shell=True, executable="/bin/bash")
+# subprocess.run("npm run cy:run", shell=True, executable="/bin/bash")
 
+# # Check the exit status of tests
+# result = subprocess.run("echo $?", shell=True, executable="/bin/bash", capture_output=True)
+# exit_status = int(result.stdout.decode().strip())
+
+# # Handle the if condition
+# if exit_status != 0:
+#     # Perform actions when the condition is true
+#     subprocess.run("echo 'EXIT_CODE=1' >> $BASH_ENV", shell=True, executable="/bin/bash")
+
+# subprocess.run("set -e", shell=True, executable="/bin/bash")
+
+
+import subprocess
+
+command = """
+set +e
+npm run cy:run
 # Check the exit status of tests
-result = subprocess.run("echo $?", shell=True, executable="/bin/bash", capture_output=True)
-exit_status = int(result.stdout.decode().strip())
+CURR_STATUS=$?
+if [[ $CURR_STATUS -ne 0 ]]; then
+    echo "EXIT_CODE=1" >> $BASH_ENV
+fi
+set -e
+"""
 
-# Handle the if condition
-if exit_status != 0:
-    # Perform actions when the condition is true
-    subprocess.run("echo 'EXIT_CODE=1' >> $BASH_ENV", shell=True, executable="/bin/bash")
+EXIT_CODE = subprocess.call(command, shell=True)
 
-subprocess.run("set -e", shell=True, executable="/bin/bash")
 
 # Get the list of file names in the diff folder
 diff_files = os.listdir(diff_path)
