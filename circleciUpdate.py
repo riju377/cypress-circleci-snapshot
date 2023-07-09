@@ -42,3 +42,9 @@ for file_name in comparison_files:
         if file_name in baseline_files_before:
             os.remove(file_path)
             print(f"Deleted file: {file_path}")
+
+        else:
+            command = r'''
+                echo "EXIT_CODE=1" >> $BASH_ENV
+            '''
+            exit_code = subprocess.call(["/bin/sh", "-c", command])
