@@ -1,4 +1,4 @@
 node_modules
-cypress/screenshots
-screenshotsFolder
-artifacts
+cypress/screenshots/
+cypress-visual-screenshots/comparison/
+cypress-visual-screenshots/diff/
