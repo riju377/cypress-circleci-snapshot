@@ -536,6 +536,7 @@
             <strong>$__failureThreshold__%</strong>
             <div>Actual: </div>
             <strong>$__percentage__%</strong>
+            <button class="update-image-button" data-baseline="$__baselinePath__" data-comparison="$__comparisonPath__">Update Image</button>
           </div>
 
           <div class="collapse-item__content">
@@ -593,7 +594,7 @@
     </template>
 
     <script type="text/javascript">
-      const testData = [{"status":"pass","name":"visualcapture.cy-first","percentage":0,"failureThreshold":0},{"status":"pass","name":"visualreg2.cy-second","percentage":0,"failureThreshold":0},{"status":"pass","name":"visualreg2.cy-third","percentage":0,"failureThreshold":0},{"status":"pass","name":"visualreg2.cy-forth","percentage":0,"failureThreshold":0}]
+      const testData = [{"status":"fail","name":"visualcapture.cy-first","percentage":0.14005139749175635,"failureThreshold":0},{"status":"fail","name":"visualreg2.cy-second","percentage":0.017011582507043235,"failureThreshold":0}]
 
       const ITEM_STATUS = {
         PASS: 'pass',
@@ -825,6 +826,16 @@
           const container = target.querySelector(selector)
           container.append(...children)
         },
+
+        // update button eventListener
+        updateImageButton(target, id){
+          const Button = target.querySelector('.collapse-item__header').querySelector('.update-image-button');
+          Button.addEventListener('click', async function() {
+            const baselinePath = `./cypress-visual-screenshots/baseline/${id}.png`;
+            const comparisonPath = `./cypress-visual-screenshots/comparison/${id}.png`;
+            await updateImageOnServer(baselinePath, comparisonPath, id);
+          });
+        }
       }
 
       const CollapseItemBuilder = {
@@ -847,6 +858,10 @@
           })
           DOMBuilder.addExpansionEventListener(leaf)
           ModalHelpers.addShowSnapshotsModalEventListener(leaf, id)
+
+          // Add event listener to the button
+          DOMBuilder.updateImageButton(leaf,id)
+
           return leaf
         },
 
@@ -866,6 +881,33 @@
           return branch
         },
       }
+
+
+// Function to handle the API call and update the image on the server
+async function updateImageOnServer(baselinePath, comparisonPath, id) {
+  try {
+    const response = await fetch('http://localhost:3000/update-image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ baselinePath, comparisonPath, id }),
+    });
+
+    if (response.ok) {
+      console.log('Image updated successfully');
+      // Perform any additional actions after image update
+      window.location.reload();
+    } else {
+      console.log('Failed to update image');
+      // Handle the error scenario
+    }
+  } catch (error) {
+    console.error('Error updating image:', error);
+    // Handle the error scenario
+  }
+}
+
 
       class FamilyLine {
         constructor(str) {

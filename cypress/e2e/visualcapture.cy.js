@@ -8,7 +8,7 @@ describe('Home Page', () => {
       // Assert that the home page contains the expected texts
       cy.contains('particular paragraph really shouldnt be the first sentence')
       cy.contains('transition')
-      cy.compareSnapshot('first');
+      if(true) cy.compareSnapshot('first');
     })
   })
 
