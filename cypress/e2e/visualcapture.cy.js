@@ -11,3 +11,6 @@ describe('Home Page', () => {
       cy.compareSnapshot('first');
     })
   })
+
+
+  // can implement using if else
