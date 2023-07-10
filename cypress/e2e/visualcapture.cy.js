@@ -1,3 +1,6 @@
+// Decide whether you want do screenshot testing or not
+let takeSnapshot = true;
+
 describe('Home Page', () => {
     beforeEach(() => {
       // Visit the home page before each test
@@ -8,7 +11,7 @@ describe('Home Page', () => {
       // Assert that the home page contains the expected texts
       cy.contains('particular paragraph really shouldnt be the first sentence')
       cy.contains('transition')
-      if(true) cy.compareSnapshot('first');
+      if(takeSnapshot) cy.compareSnapshot('first');
     })
   })
 

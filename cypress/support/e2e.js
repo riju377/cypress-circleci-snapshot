@@ -3,6 +3,6 @@
 const compareSnapshotCommand = require('cypress-image-diff-js/dist/command');
 compareSnapshotCommand();
 
-after(() => {
-    cy.task("generateReport");
-  });
+// after(() => {
+//     cy.task("generateReport");
+//   });
