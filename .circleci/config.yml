@@ -1,8 +1,11 @@
 version: 2.1
 jobs:
   build:
+    environment:
+      EXIT_CODE: 0
     docker:
       - image: cimg/node:16.20-browsers
+      - image: cimg/python:3.9.6
     working_directory: ~/cypress-circleci-snapshot
     steps:
       - checkout
@@ -20,13 +23,68 @@ jobs:
           name: wait for localhost
           shell: /bin/sh
           command: wget --waitretry=3 --tries=40 --timeout=5 --retry-connrefused --spider --quiet http://localhost:3000
-      - run: 
-          name: Cypress Tests
+
+      - run:
+          name: cypress tests and current differences
           command: |
-            echo 'export PERCY_TOKEN=$PERCY_TOKEN' >> $BASH_ENV
-            npm run cy:percy
+            # set +e
+            python3 circleciUpdate.py
+            # # Check the exit status of tests
+            # CURR_STATUS=$?
+            # if [[ $CURR_STATUS -ne 0 ]]; then
+            # echo "EXIT_CODE=1" >> $BASH_ENV
+            # fi
+            # set -e
+
+      - store_artifacts:
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+          destination: cypress-visual-screenshots/baseline
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
+      #     destination: cypress-visual-screenshots/comparison
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+      #     destination: cypress-visual-screenshots/diff
+      # - store_artifacts:
+      #     path: ~/cypress-circleci-snapshot/cypress-visual-report/
+      #     destination: cypress-visual-report/
+      - run:
+          name: Checking for test failure
+          command: |
+            # If any test fails we return error
+            if [[ "$EXIT_CODE" -ne 0 ]]; then
+              echo "Exit status of your-command-1"
+              exit 1
+            fi
 
 workflows:
   master_workflow:
     jobs:
       - build
+
+
+
+# curl -H "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" https://circleci.com/api/v1.1/project/github/riju377/cypress-circleci-snapshot/88/artifacts \ | grep -o 'https://[^"]*' \ | wget --verbose --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" --input-file -
+
+
+# curl -X GET https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/93/artifacts \
+#  --header "Content-Type: application/json" \
+#  --header "Accept: application/json" \
+#  --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" \
+#  | grep -o 'https://[^"]*' \
+#  | wget --header="Circle-Token:"CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b"" -v -i -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
