@@ -93,7 +93,7 @@ const html = `<!DOCTYPE html>
 
     <section>
       <h2>Contact Me</h2>
-      <p>Email: info@example.com</p>
+      <p>Email: info@example.com.</p>
       <p>Phone: 123-456-7890</p>
     </section>
   </main>
