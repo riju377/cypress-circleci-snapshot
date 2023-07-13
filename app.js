@@ -11,7 +11,7 @@ const html = `<!DOCTYPE html>
   <title>Home Page</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background-color: lightblue;
@@ -93,7 +93,7 @@ const html = `<!DOCTYPE html>
 
     <section>
       <h2>Contact Me</h2>
-      <p>Email: info@example.com.</p>
+      <p>Email: info@example.com</p>
       <p>Phone: 123-456-7890</p>
     </section>
   </main>
