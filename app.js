@@ -11,7 +11,7 @@ const html = `<!DOCTYPE html>
   <title>Home Page</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Pacifico', cursive;
       margin: 0;
       padding: 0;
       background-color: lightblue;
