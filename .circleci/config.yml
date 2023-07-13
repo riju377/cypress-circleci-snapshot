@@ -42,9 +42,9 @@ jobs:
       # - store_artifacts:
       #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
       #     destination: cypress-visual-screenshots/comparison
-      # - store_artifacts:
-      #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
-      #     destination: cypress-visual-screenshots/diff
+      - store_artifacts:
+          path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/diff
+          destination: cypress-visual-screenshots/diff
       # - store_artifacts:
       #     path: ~/cypress-circleci-snapshot/cypress-visual-report/
       #     destination: cypress-visual-report/
