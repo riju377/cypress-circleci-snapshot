@@ -38,7 +38,7 @@ jobs:
  
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-          destination: cypress-visual-screenshots/baseline
+          destination: cypress-visual-screenshots/comparison
       # - store_artifacts:
       #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
       #     destination: cypress-visual-screenshots/comparison
