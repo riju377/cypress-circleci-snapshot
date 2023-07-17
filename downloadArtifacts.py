@@ -21,7 +21,7 @@ if response.status_code == 200:
 
     # Delete directories "diff" and "comp" if they exist
     if os.path.exists("cypress-visual-screenshots/diff"):
-        shutil.rmtree("diff")
+        shutil.rmtree("cypress-visual-screenshots/diff")
     # if os.path.exists("comp"):
     #     shutil.rmtree("comp")
 
