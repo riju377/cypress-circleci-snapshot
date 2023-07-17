@@ -19,9 +19,9 @@ data = response.json()
 # Check if the request was successful
 if response.status_code == 200:
 
-    # # Delete directories "diff" and "comp" if they exist
-    # if os.path.exists("diff"):
-    #     shutil.rmtree("diff")
+    # Delete directories "diff" and "comp" if they exist
+    if os.path.exists("cypress-visual-screenshots/diff"):
+        shutil.rmtree("diff")
     # if os.path.exists("comp"):
     #     shutil.rmtree("comp")
 

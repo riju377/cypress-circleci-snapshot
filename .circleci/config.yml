@@ -38,7 +38,7 @@ jobs:
  
       - store_artifacts:
           path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
-          destination: cypress-visual-screenshots/comparison
+          destination: cypress-visual-screenshots/baseline
       # - store_artifacts:
       #     path: ~/cypress-circleci-snapshot/cypress-visual-screenshots/comparison
       #     destination: cypress-visual-screenshots/comparison
@@ -64,15 +64,6 @@ workflows:
 
 
 
-# curl -H "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" https://circleci.com/api/v1.1/project/github/riju377/cypress-circleci-snapshot/88/artifacts \ | grep -o 'https://[^"]*' \ | wget --verbose --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" --input-file -
-
-
-# curl -X GET https://circleci.com/api/v2/project/github/riju377/cypress-circleci-snapshot/93/artifacts \
-#  --header "Content-Type: application/json" \
-#  --header "Accept: application/json" \
-#  --header "Circle-Token:CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b" \
-#  | grep -o 'https://[^"]*' \
-#  | wget --header="Circle-Token:"CCIPAT_LRuf2amSDCgMAqYtMjawZ1_bd12c8ed789f8138451d78ed2001463306c82c3b"" -v -i -
 
 
 
